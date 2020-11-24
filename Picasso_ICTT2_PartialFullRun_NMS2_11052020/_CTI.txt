@@ -1,0 +1,1280 @@
+﻿//**************************************
+//* CTI LGZ E570_ZMYi4x5CW             *
+//*                                    *
+//* FIT #1                             *
+//* 2014-12-05                         *
+//*                                    *
+//**************************************
+
+
+// Mandatory ''Manufacturer'' structure
+// ************************************
+Manufacturer = {
+  // Keep the leading '\' to denote a visible-string.
+  Name = '\Landis + Gyr'
+  // The manufacturer's FLAG id is a part of the DUT system title
+  ThreeLettersId = '\LGZ'
+}
+
+// Mandatory ''DeviceUnderTest'' structure
+// ***************************************
+DeviceUnderTest = {
+
+  // IDISDeviceType is 101 or 103, it is part of the DUT system title
+  //IDISDeviceType = 100 //mono
+  IDISDeviceType = 103   //tri
+  
+  // IDISFunctionType indicates the extension(s) supported by the DUT,
+  // it is also a part of the DUT system title.
+  // It is a set (possibly empty) of elements 
+  // Extension_D, Extension_L and Extension_M
+  IDISFunctionType = []
+  
+  // The serial number of the DUT is part of its system title.
+  SerialNr = 12345678
+  Type = '\Landis+Gyr E360 ZxYxxCQ... (TCP)'    // Release V83.06.06   '\any visible string'
+
+  // EUI64Address (mandatory for G3-PLC profile)
+ // EUI64Address = "000F93FFFE000001" //"000F93FFFF676A16"
+  DataLinkLayer = Ethernet
+  IPVersion = IPv4        // one of IPv4, IPv6
+
+  ConsumerInformationPush = TRUE      // TRUE or FALSE
+}
+
+// Optional ''TestOptions''
+TestOptions = {
+  DUTTelNr = '\+41765765477'
+  DUTIPAddress = "\192.168.1.47"
+}
+
+
+// Mandatory ''ObjectMode'' structure
+// **********************************
+// It defines the variant of the object model that the iCTT uses for testing.
+ObjectModel = {
+  // Optional objects implemented
+  OptionalObjects = '\'
+    + '1-0:0.9.1.255|1,' // Local Time (@86)
+    + '1-0:0.9.2.255|1,' // Local Date (@90)
+    //+ '0-2:96.3.10.255|70,' // Load Mgmt - Relay control 2 (@205)
+    + '1-0:9.8.0.255|3,' // Apparent energy import (+VA) (QI+QIV) (@406)
+    + '1-0:10.8.0.255|3,' // Apparent energy export (-VA) (QII+QIII) (@412)
+    + '1-0:5.8.1.255|3,' // Reactive energy (QI) rate 1 (@515)
+    + '1-0:5.8.2.255|3,' // Reactive energy (QI) rate 2 (@521)
+    + '1-0:5.8.3.255|3,' // Reactive energy (QI) rate 3 (@527)
+    + '1-0:5.8.4.255|3,' // Reactive energy (QI) rate 4 (@533)
+    + '1-0:6.8.1.255|3,' // Reactive energy (QII) rate 1 (@539)
+    + '1-0:6.8.2.255|3,' // Reactive energy (QII) rate 2 (@545)
+    + '1-0:6.8.3.255|3,' // Reactive energy (QII) rate 3 (@551)
+    + '1-0:6.8.4.255|3,' // Reactive energy (QII) rate 4 (@557)
+    + '1-0:7.8.1.255|3,' // Reactive energy (QIII) rate 1 (@563)
+    + '1-0:7.8.2.255|3,' // Reactive energy (QIII) rate 2 (@569)
+    + '1-0:7.8.3.255|3,' // Reactive energy (QIII) rate 3 (@575)
+    + '1-0:7.8.4.255|3,' // Reactive energy (QIII) rate 4 (@581)
+    + '1-0:8.8.1.255|3,' // Reactive energy (QIV) rate 1 (@587)
+    + '1-0:8.8.2.255|3,' // Reactive energy (QIV) rate 2 (@593)
+    + '1-0:8.8.3.255|3,' // Reactive energy (QIV) rate 3 (@599)
+    + '1-0:8.8.4.255|3,' // Reactive energy (QIV) rate 4 (@605)
+    + '1-0:9.4.0.255|5,' // Demand Register 5 - Apparent energy import (+VA) (@736)
+    + '1-0:10.4.0.255|5,' // Demand Register 6 - Apparent energy export (-VA) (@749)
+    + '1-0:14.7.0.255|3,' // Instantaneous net frequency; any phase (@1359)
+    + '1-0:9.7.0.255|3,' // Instantaneous apparent import power (+VA) (@1395)
+    //+ '1-0:16.24.0.255|5,' // Average  Net Power (|+A|-|-A|) (@1420)
+    //+ '1-0:13.7.0.255|3,' // Instantaneous Power factor (+A/+VA) (@1446)
+    //+ '1-0:13.5.0.255|4,' // Last Average Power factor (+A/+VA) (@1452)
+    + '1-0:13.3.0.255|4,' // Minimum Power factor (+A/+VA) (@1460)
+    //+ '1-0:0.8.2.255|3' // Measurement Period 3 for Instantaneous values (@1468)
+    //+ '0-0:26.6.0.255|56' // S-FSK Reporting system list (@1978)
+    
+  
+  InstanceExtraInfo = {
+    // Tariffication script table (@129)
+    LogicalName = '0-0:10.0.100.255'
+    ClassId = 9
+      MethodExtraInfo = {
+        // execute
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // Disconnector Control  Log (@181)
+    LogicalName = '0-0:99.98.2.255'
+    ClassId = 7
+      AttributeExtraInfo = {
+        // capture_objects
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+  }
+
+  
+  InstanceExtraInfo = {
+    // Load Mgmt - Relay control 1 (@197)
+    LogicalName = '0-1:96.3.10.255'
+    ClassId = 70
+      AttributeExtraInfo = {
+        // control_mode
+        AttributeId = 4
+        AccessRights = [GET,SET]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // Load Mgmt - Relay control 2 (@205)
+    LogicalName = '0-2:96.3.10.255'
+    ClassId = 70
+      AttributeExtraInfo = {
+        // control_mode
+        AttributeId = 4
+        AccessRights = [GET,SET]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // Limiter (@213)
+    LogicalName = '0-0:17.0.0.255'
+    ClassId = 71
+      AttributeExtraInfo = {
+        // actions
+        AttributeId = 11
+        AccessRights = [GET,SET]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // Standard Event Log (@261)
+    LogicalName = '0-0:99.98.0.255'
+    ClassId = 7
+      AttributeExtraInfo = {
+        // capture_objects
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+  }
+  
+  
+   InstanceExtraInfo = {
+    // Standard Event Log (@331)
+    LogicalName = '0-0:99.98.5.255'
+    ClassId = 7
+      AttributeExtraInfo = {
+        // capture_objects
+        AttributeId = 3
+        AccessRights = [GET,SET]
+        
+      }
+  }
+    
+InstanceExtraInfo = {
+    // Image transfer (@388)
+    LogicalName = '0-0:44.0.0.255'
+    ClassId = 18
+      AttributeExtraInfo = {
+        // image block size
+        AttributeId = 2
+        AccessRights = [GET,SET]
+      }
+  }  
+  InstanceExtraInfo = {
+    // Fraud Detection Log (@276)
+    LogicalName = '0-0:99.98.1.255'
+    ClassId = 7
+      AttributeExtraInfo = {
+        // capture_objects
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // Power Failure Event Log (@1234)
+    LogicalName = '1-0:99.97.0.255'
+    ClassId = 7
+      AttributeExtraInfo = {
+        // capture_objects
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // Power Quality Log (@1249)
+    LogicalName = '0-0:99.98.4.255'
+    ClassId = 7
+      AttributeExtraInfo = {
+        // capture_objects
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+  }
+  
+    
+  InstanceExtraInfo = {
+    // M-Bus Value channel 1, instance 1 (@1571)
+    LogicalName = '0-1:24.2.1.255'
+    ClassId = 4
+      AttributeExtraInfo = {
+        // scaler_unit
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+      MethodExtraInfo = {
+        // reset
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Value channel 1, instance 2 (@1579)
+    LogicalName = '0-1:24.2.2.255'
+    ClassId = 4
+      AttributeExtraInfo = {
+        // scaler_unit
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+      MethodExtraInfo = {
+        // reset
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Value channel 1, instance 3 (@1587)
+    LogicalName = '0-1:24.2.3.255'
+    ClassId = 4
+      AttributeExtraInfo = {
+        // scaler_unit
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+      MethodExtraInfo = {
+        // reset
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Value channel 1, instance 4 (@1595)
+    LogicalName = '0-1:24.2.4.255'
+    ClassId = 4
+      AttributeExtraInfo = {
+        // scaler_unit
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+      MethodExtraInfo = {
+        // reset
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Value channel 2, instance 1 (@1603)
+    LogicalName = '0-2:24.2.1.255'
+    ClassId = 4
+      AttributeExtraInfo = {
+        // scaler_unit
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+      MethodExtraInfo = {
+        // reset
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Value channel 2, instance 2 (@1611)
+    LogicalName = '0-2:24.2.2.255'
+    ClassId = 4
+      AttributeExtraInfo = {
+        // scaler_unit
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+      MethodExtraInfo = {
+        // reset
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Value channel 2, instance 3 (@1619)
+    LogicalName = '0-2:24.2.3.255'
+    ClassId = 4
+      AttributeExtraInfo = {
+        // scaler_unit
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+      MethodExtraInfo = {
+        // reset
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Value channel 2, instance 4 (@1627)
+    LogicalName = '0-2:24.2.4.255'
+    ClassId = 4
+      AttributeExtraInfo = {
+        // scaler_unit
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+      MethodExtraInfo = {
+        // reset
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Value channel 3, instance 1 (@1635)
+    LogicalName = '0-3:24.2.1.255'
+    ClassId = 4
+      AttributeExtraInfo = {
+        // scaler_unit
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+      MethodExtraInfo = {
+        // reset
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Value channel 3, instance 2 (@1643)
+    LogicalName = '0-3:24.2.2.255'
+    ClassId = 4
+      AttributeExtraInfo = {
+        // scaler_unit
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+      MethodExtraInfo = {
+        // reset
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Value channel 3, instance 3 (@1651)
+    LogicalName = '0-3:24.2.3.255'
+    ClassId = 4
+      AttributeExtraInfo = {
+        // scaler_unit
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+      MethodExtraInfo = {
+        // reset
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Value channel 3, instance 4 (@1659)
+    LogicalName = '0-3:24.2.4.255'
+    ClassId = 4
+      AttributeExtraInfo = {
+        // scaler_unit
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+      MethodExtraInfo = {
+        // reset
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Value channel 4, instance 1 (@1667)
+    LogicalName = '0-4:24.2.1.255'
+    ClassId = 4
+      AttributeExtraInfo = {
+        // scaler_unit
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+      MethodExtraInfo = {
+        // reset
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Value channel 4, instance 2 (@1675)
+    LogicalName = '0-4:24.2.2.255'
+    ClassId = 4
+      AttributeExtraInfo = {
+        // scaler_unit
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+      MethodExtraInfo = {
+        // reset
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Value channel 4, instance 3 (@1683)
+    LogicalName = '0-4:24.2.3.255'
+    ClassId = 4
+      AttributeExtraInfo = {
+        // scaler_unit
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+      MethodExtraInfo = {
+        // reset
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Value channel 4, instance 4 (@1691)
+    LogicalName = '0-4:24.2.4.255'
+    ClassId = 4
+      AttributeExtraInfo = {
+        // scaler_unit
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+      MethodExtraInfo = {
+        // reset
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+
+  InstanceExtraInfo = {
+    // M-Bus Master Control log object 1 (@1850)
+    LogicalName = '0-1:24.5.0.255'
+    ClassId = 7
+      AttributeExtraInfo = {
+        // capture_objects
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Master Control log object 2 (@1861)
+    LogicalName = '0-2:24.5.0.255'
+    ClassId = 7
+      AttributeExtraInfo = {
+        // capture_objects
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Master Control log object 3 (@1872)
+    LogicalName = '0-3:24.5.0.255'
+    ClassId = 7
+      AttributeExtraInfo = {
+        // capture_objects
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Master Control log object 4 (@1883)
+    LogicalName = '0-4:24.5.0.255'
+    ClassId = 7
+      AttributeExtraInfo = {
+        // capture_objects
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // M-Bus Event Log (@1898)
+    LogicalName = '0-0:99.98.3.255'
+    ClassId = 7
+      AttributeExtraInfo = {
+        // capture_objects
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // IPv6 setup (@2047)
+    LogicalName = '0-0:25.7.0.255'
+    ClassId = 48
+      
+      MethodExtraInfo = {
+        // add IPv6 address
+        MethodId = 1
+        AccessRights = [ACTION]
+        }
+        MethodExtraInfo = {
+        // remoove IPv6 address
+        MethodId = 2
+        AccessRights = [ACTION]
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // Auto connect(@2163)
+    LogicalName = '0-0:2.1.0.255'
+    ClassId = 29
+      AttributeExtraInfo = {
+        // destination list
+        AttributeId = 6
+        AccessRights = [GET,SET]
+      }
+  }
+  
+    InstanceExtraInfo = {
+    // Activity Calendar(@112)
+    LogicalName = '0-0:13.0.0.255'
+    ClassId = 20
+      MethodExtraInfo = {
+        // destination list
+        MethodId = 1
+        AccessRights = [ACTION]
+      }
+  }
+  
+    InstanceExtraInfo = {
+    // Register activation - Energy(@129)
+    LogicalName = '0-0:14.0.1.255'
+    ClassId = 6
+      AttributeExtraInfo = {
+        // destination list
+        AttributeId = 2
+        AccessRights = [GET,SET]
+      }
+  }
+  
+    InstanceExtraInfo = {
+    // Register activation - Maximum Demand(@135)
+    LogicalName = '0-0:14.0.2.255'
+    ClassId = 6
+      AttributeExtraInfo = {
+        // destination list
+        AttributeId = 2
+        AccessRights = [GET,SET]
+      }
+  }
+  
+    InstanceExtraInfo = {
+    // Predefined Scripts - MDI reset / end of billing period(@147)
+    LogicalName = '0-0:10.0.1.255'
+    ClassId = 9
+      AttributeExtraInfo = {
+        // destination list
+        AttributeId = 2
+        AccessRights = [GET]
+      }
+  }
+  
+    InstanceExtraInfo = {
+    // End of billing period 1 scheduler(@152)
+    LogicalName = '0-0:15.0.0.255'
+    ClassId = 22
+      AttributeExtraInfo = {
+        // destination list
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+  }
+  
+    InstanceExtraInfo = {
+    // Push action scheduler - Consumer Information(@351)
+    LogicalName = '0-4:15.0.4.255'
+    ClassId = 22
+	 AttributeExtraInfo = {
+        // executed script
+        AttributeId = 2
+        AccessRights = [GET,SET]
+      }
+      AttributeExtraInfo = {
+        // destination list
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+  }
+  
+    InstanceExtraInfo = {
+    // Predefined Scripts - Image activation(@407)
+    LogicalName = '0-0:10.0.107.255'
+    ClassId = 9
+      AttributeExtraInfo = {
+        // destination list
+        AttributeId = 2
+        AccessRights = [GET]
+      }
+  }
+  
+    InstanceExtraInfo = {
+    // Load profile with period 1(@1146)
+    LogicalName = '1-0:99.1.0.255'
+    ClassId = 7
+      AttributeExtraInfo = {
+        // destination list
+        AttributeId = 8
+        AccessRights = [GET,SET]
+      }
+  }
+  
+    InstanceExtraInfo = {
+    // Load profile with period 2(@1161)
+    LogicalName = '1-0:99.2.0.255'
+    ClassId = 7
+      AttributeExtraInfo = {
+        // destination list
+        AttributeId = 8
+        AccessRights = [GET,SET]
+      }
+  }
+  
+    InstanceExtraInfo = {
+    // Push action scheduler - Interval_1(@2144)
+    LogicalName = '0-1:15.0.4.255'
+    ClassId = 22
+      AttributeExtraInfo = {
+        // destination list
+        AttributeId = 2
+        AccessRights = [GET]
+      }
+	   AttributeExtraInfo = {
+        // destination list
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+  }
+
+
+    InstanceExtraInfo = {
+    // Push action scheduler - Interval_2(@2150)
+    LogicalName = '0-2:15.0.4.255'
+    ClassId = 22
+      AttributeExtraInfo = {
+        // destination list
+        AttributeId = 2
+        AccessRights = [GET]
+      }
+	   AttributeExtraInfo = {
+        // destination list
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+  }
+
+    InstanceExtraInfo = {
+    // Push action scheduler - Interval_3(@2156)
+    LogicalName = '0-3:15.0.4.255'
+    ClassId = 22
+      AttributeExtraInfo = {
+        // destination list
+        AttributeId = 2
+        AccessRights = [GET]
+      }
+	   AttributeExtraInfo = {
+        // destination list
+        AttributeId = 3
+        AccessRights = [GET,SET]
+      }
+  }
+
+ (* 
+  InstanceExtraInfo = {
+    // S-FSK MAC counters (@1962)
+    LogicalName = '0-0:26.3.0.255'
+    ClassId = 53
+      AttributeExtraInfo = {
+        // repetitions_counter
+        AttributeId = 5
+        AccessRights = [GET,SET]
+      }
+      AttributeExtraInfo = {
+        // transmissions_counter
+        AttributeId = 6
+        AccessRights = [GET,SET]
+      }
+      AttributeExtraInfo = {
+        // CRC_OK_frames_counter
+        AttributeId = 7
+        AccessRights = [GET,SET]
+      }
+      AttributeExtraInfo = {
+        // CRC_NOK_frames_counter
+        AttributeId = 8
+        AccessRights = [GET,SET]
+      }
+  }
+  *)
+  
+ InstanceExtraInfo = {
+    // Set value for Consumer Message Text
+    LogicalName = '0-0:96.13.0.255'
+    ClassId = 1
+      AttributeExtraInfo = {
+        AttributeId = 2
+        SetData = '\<Data><OctetString Value="3132333435363738" /></Data>'
+      }
+  }
+  
+  InstanceExtraInfo = {
+    // Set value for Error register value
+    LogicalName = '0-0:97.97.0.255'
+    ClassId = 1
+      AttributeExtraInfo = {
+        AttributeId = 2
+        SetData = '\<Data><DoubleLongUnsigned Value="00000000" /></Data>'
+      }
+  }
+  
+  
+  InstanceExtraInfo = {
+    // Set value for Push Setup - Interval 1
+    LogicalName = '0-1:25.9.0.255'
+    ClassId = 40
+      AttributeExtraInfo = {
+        AttributeId = 6
+        SetData = '\<Data><Unsigned Value="06" /></Data>'
+      }
+  }
+  
+ 
+ InstanceExtraInfo = {
+    // Set clock to ..
+  LogicalName = '0-0:1.0.0.255'
+  ClassId = 8
+   AttributeExtraInfo = {
+   AttributeId = 2
+   SetData = '\<Data><OctetString Value="07E40507FF101E00FF8000FF" /></Data>'
+ }
+  AttributeExtraInfo = {
+     AttributeId = 3
+     SetData = '\<Data><Long Value ="0000" /></Data>'    
+   }
+}
+
+
+
+InstanceExtraInfo = {
+    // G3-PLC MAC Setup (1277)
+    LogicalName = '0-0:29.1.0.255'
+    ClassId = 91
+      AttributeExtraInfo = {
+      //mac_key_table
+        AttributeId = 5
+        SetData = '\<Data>'
++'        <Array Qty="01" >'
++'          <Structure Qty="02" >'
++'            <Unsigned Value="00" />'
++'            <OctetString Value="112233445566778899AABBCCDDEEFF" />'
++'            </Structure>'
++'            </Array>'
++'            </Data>'
+
+      }
+  }
+  
+  InstanceExtraInfo = {
+    LogicalName = '0-0:40.0.0.255' ClassId = 15
+      Version = 3
+	   AttributeExtraInfo = {
+        // destination list
+        AttributeId = 6
+        AccessRights = [GET,SET]
+      }
+	  
+	   MethodExtraInfo = {
+        // destination list
+        MethodId = 2
+        AccessRights = [ACTION]
+      }
+  }   
+  InstanceExtraInfo = {
+    LogicalName = '0-0:40.0.1.255' ClassId = 15
+      Version = 3
+  }
+  InstanceExtraInfo = {
+    LogicalName = '0-0:40.0.2.255' ClassId = 12
+      Version = 3
+  }
+  
+  InstanceExtraInfo = {
+    LogicalName = '0-1:24.1.0.255' ClassId = 72
+      Version = 1
+  }
+
+
+InstanceExtraInfo = {
+    LogicalName = '0-2:24.1.0.255' ClassId = 72
+      Version = 1
+  }
+  
+  InstanceExtraInfo = {
+    LogicalName = '0-3:24.1.0.255' ClassId = 72
+      Version = 1
+  }
+  
+  InstanceExtraInfo = {
+    LogicalName = '0-4:24.1.0.255' ClassId = 72
+      Version = 1
+  }
+  
+  InstanceExtraInfo = {
+    LogicalName = '0-0:43.0.0.255' ClassId = 64
+      Version = 1
+  }
+  
+  InstanceExtraInfo = {
+    LogicalName = '0-0:43.0.1.255' ClassId = 64
+      Version = 1
+  }
+  
+  
+ 
+    InstanceExtraInfo = {
+    // Set special days to 30 entries
+    LogicalName = '0-0:11.0.0.255'
+    ClassId = 11
+      AttributeExtraInfo = {
+        AttributeId = 2
+        SetData = '\<Data>'
++'        <Array Qty="1E" >'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0101FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0102FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0103FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0104FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0105FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0106FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0107FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0108FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0109FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF010AFF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0201FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0202FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0203FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0204FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0205FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0206FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0207FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0208FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0209FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF020AFF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0301FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0302FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0303FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0304FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0305FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0306FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0307FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0308FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF0309FF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'          <Structure Qty="03" >'
++'            <LongUnsigned Value="0001" />'
++'            <OctetString Value="FFFF030AFF" />'
++'            <Unsigned Value="02" />'
++'          </Structure>'
++'        </Array>'
++'      </Data>'
+      }
+   }
+}
+
+
+// Mandatory ''TestParameters'' structure
+// **************************************
+// Defines miscellaneous values used during the test
+TestParameters =
+{
+  
+  
+  ConnectDisconnectDelay = 20000      // (Optional) Delay (in ms) after executing the Disconnector Control (class 70)
+    
+  ClientSystemTitle = '4C475A6700BC614E'    // Client system title
+  
+  // Structure for the ImageTransfer
+  ImageTransfer = 
+  {
+  
+    ImageIdentifier = '4C47465730'      // Image identifier as passed to the image_transfer_initiate method
+    ImageFileName = '\Ref_NMS2releaseDevelopmentCombined_0.img'    // Filename of the image to transfer. If no filepath is given, then the file is supposed to be in the same directory as the CTI file
+    Timeout = 1000000      // Time (in ms) that the iCTT loops reading the image_transfer status waiting for changes
+  }
+  
+  PushTimeout = 600000   // Push timeout is the time (in ms) awaited by the iCTT for the DUT to send a DataNotification
+  MinInterWPDUFramesDelay = 2000    // (Optional) Minimal Inter WPDU frames delay, is the minimal delay (in ms) between two WPDU frames
+  ProfilePeriodsQty = 6    // (Optional) Profile periods qty is the number of entries created in the profiles by new profiles tests. Must be larger than 5, defaults to 6 when not specified
+  CaptureDelay = 15000    // (Optional) Capture delay in (ms)
+  ClipCallDuration = 20000    // (Optional) Duration (in ms) of the clip call from return of ATDT to ATH (defaults to 12000)
+
+  // (Optional) Some AutoConnect attributes
+  AutoConnect = {
+    Repetitions = 3
+    RepetitionDelay = 30
+  }
+  
+  // (Optional) Some PushSetup attributes
+  PushSetup = {
+    NumberOfRetries = 2
+    RepetitionDelay = 30
+  }
+  
+  WakeUpDelay = 30000   // (optional) Delay (in ms) to wait before performing a wake-up, default = 10000
+  DisconnectToSendSMSDelay = 10000  // (optional) Delay in ms to wait between a disconnection and the sending of a SMS, default = 0
+
+ // (optional) Delay in ms between the reception of a DataNotification and the closing of the inbound push-connection
+  // opened by the DUT. By default the value is 0. A value of 0xffffffff means that iCTT2 will NOT close the connection, 
+  // the DUT will have to close the connection itself.
+  DataNotificationToDisconnectDelay = 10000
+}
+
+
+// Mandatory ''PLCConfig'' structure
+// *********************************
+// The PLCConfig is set before each test session. The various members are
+// defined in the appropriate document. The values defined hereafter are
+// the default values
+(*PLCConfig = {
+  AddrMAC = 0xC00
+  TimeoutNotAddr = 360
+  MaxSubFrames = 7
+  TimeUpdatePeriod = 0
+  BkgTaskEnabled = 1
+  BkgMinDelay = 60
+  DiscoverTimeSlots = 20
+  ResponseProbability = 100
+  MaxCredit = 2
+  DiscoverPeriod = 0 // was 60, disable periodic discovery
+  TransmissionGain = 0
+  ReceptionGain = 8
+  BaudRate = 1
+  InputFrequency = 0
+  NbComOkDecrCredit = 3
+  DecrCredit = 1
+  IncrCredit = 2
+  MaxRetry = 1     //3
+  RepeaterCallEnabled = 0
+  RepeaterCallLevel = 1000
+  NewBcplTSlotCount = 10
+  AlarmMngtEnabled = 0 // was 1, Disable alarms
+  AlarmMngtDelay = 0
+  AutoDiscoveryPriority = 2
+  FCTxValue = 100
+}
+*)
+
+
+// Mandatory ''SecurityElements''
+// ******************************
+// There is one structure per client, each specifies an ''EncryptionKey''
+// and a ''Policy''. An encryption key is a visible-string of 32 characters,
+// with each pair encoding one byte of a 16 bytes binary key.
+// Policy is one of NO_SECURITY, AUTHENTICATION, ENCRYPTION or AUTHENTICATION_AND_ENCRYPTION
+// StandardSecurityElements
+// Mandatory, used for the standard access (DC and Java API).
+// No context name is required. The DC selects the context according
+// to the ''Policy'' member. If zero, then the DC generates an AARQ with LONG_NAMES context.
+// If positive then the DC generates an AARQ with LONG_NAME_WITH_CIPHERING context.
+
+(*
+StandardSecurityElements = {
+  Public = {
+    MechanismName = LOWEST_LEVEL_SECURITY
+    Policy = NO_SECURITY
+  }
+
+  Management = {
+    //MechanismName = HIGH_LEVEL_SECURITY_GMAC//LOW_LEVEL_SECURITY
+    //Policy = NO_SECURITY//ENCRYPTION//NO_SECURITY//AUTHENTICATION_AND_ENCRYPTION
+    //Password = '\12345678'
+    ContextName = LONG_NAMES_WITH_CIPHERING //LONG_NAMES_WITH_CIPHERING//LONG_NAMES
+    MechanismName = HIGH_LEVEL_SECURITY_GMAC //HIGH_LEVEL_SECURITY_GMAC//LOW_LEVEL_SECURITY
+    Policy = NO_SECURITY //ENCRYPTION//NO_SECURITY//AUTHENTICATION//AUTHENTICATION_AND_ENCRYPTION
+    Password = '\12345678'
+  }
+  PreEstablished = {
+    Policy = NO_SECURITY //ENCRYPTION//NO_SECURITY
+  }  
+}
+*)
+
+(*
+// TunnelSecurityElements
+// Mandatory, used when making tunneled accesses.
+TunnelSecurityElements = {
+  Public = {
+    ContextName = LONG_NAMES
+    MechanismName = LOWEST_LEVEL_SECURITY
+    Policy = NO_SECURITY
+  }
+  Management = {
+    ContextName = LONG_NAMES_WITH_CIPHERING //LONG_NAMES_WITH_CIPHERING//LONG_NAMES
+    MechanismName = HIGH_LEVEL_SECURITY_GMAC //HIGH_LEVEL_SECURITY_GMAC//LOW_LEVEL_SECURITY
+    Policy = AUTHENTICATION_AND_ENCRYPTION //ENCRYPTION//NO_SECURITY//AUTHENTICATION//AUTHENTICATION_AND_ENCRYPTION
+    Password = '\12345678'
+  }
+  PreEstablished = {
+    Policy = NO_SECURITY //ENCRYPTION//NO_SECURITY//AUTHENTICATION//AUTHENTICATION_AND_ENCRYPTION
+  }
+}
+*)
+
+// LocalSecurityElements
+// Mandatory, used when making ''local'' accesses.
+// LocalSecurityElements
+// Mandatory
+LocalSecurityElements =
+{
+
+  Public =
+  {
+    ContextName = LONG_NAMES                // ContextName: either LONG_NAMES or LONG_NAMES_WITH_CIPHERING
+    MechanismName = LOWEST_LEVEL_SECURITY   // MechanismName: either LOWEST_LEVEL_SECURITY, LOW_LEVEL_SECURITY or HIGH_LEVEL_SECURITY_GMAC
+    Policy = NO_SECURITY                    // Policy: either NO_SECURITY, AUTHENTICATION, ENCRYPTION or AUTHENTICATION_AND_ENCRYPTION
+  }
+  
+  Management =
+  {
+    ContextName = LONG_NAMES_WITH_CIPHERING
+    MechanismName = HIGH_LEVEL_SECURITY_GMAC
+    Policy = AUTHENTICATION_AND_ENCRYPTION
+    CipheringStyle = Service 
+    Password = '\12345678'                  // Password: if required by the mechanism name.
+  }
+  
+  PreEstablished = 
+  {
+    Policy = AUTHENTICATION_AND_ENCRYPTION
+    ServerMaxReceivePDUSize = 1280      // ServerMaxReceivePDUSize (integer)
+    CipheringStyle = GENERAL            // CipheringStyle (enum), GENERAL or SERVICE
+  }
+}
+
+// RemoteSecurityElements
+// Mandatory
+RemoteSecurityElements =
+{
+
+  Public =
+  {
+    ContextName = LONG_NAMES
+    MechanismName = LOWEST_LEVEL_SECURITY
+    Policy = NO_SECURITY
+    //Password = '\12345678'                  // Password: if required by the mechanism name.
+  }
+  
+  
+  Management =
+  {
+    ContextName = LONG_NAMES_WITH_CIPHERING                    // LONG_NAMES or LONG_NAMES_WITH_CIPHERING
+    MechanismName = HIGH_LEVEL_SECURITY_GMAC    // LOWEST_LEVEL_SECURITY, LOW_LEVEL_SECURITY or HIGH_LEVEL_SECURITY_GMAC
+    Policy = AUTHENTICATION_AND_ENCRYPTION                        //  NO_SECURITY, AUTHENTICATION, ENCRYPTION or AUTHENTICATION_AND_ENCRYPTION
+   // Password = '\1111111111111111111111111111111111111111111111111111111111111111'
+     CipheringStyle = SERVICE
+  }
+  
+  PreEstablished =
+  {
+    Policy = AUTHENTICATION_AND_ENCRYPTION
+    ServerMaxReceivePDUSize = 1280
+    CipheringStyle = GENERAL //SERVICE  //GENERAL
+  }
+}
+
+// SMS security elements
+// Mandatory
+SMSSecurityElements = {
+  PreEstablished = {
+    Policy = NO_SECURITY      //  AUTHENTICATION_AND_ENCRYPTION   ENCRYPTION  NO_SECURITY
+    ServerMaxReceivePDUSize = 128
+    CipheringStyle = GENERAL
+  }
+}
+// Mandatory parameters of the ''Remote'' TCP Profile
+TCPProfile =
+{
+  ServerTCPPort = 1000
+  ResponseTimeout = 10000
+  ConnectTimeout = 60000
+  DisconnectToConnectDelay = 5000
+}
+// Mandatory parameters of the ''Remote'' G3-PLC profile
+//G3PLCProfile = {
+  // FrequencyBand : one of FCC, CENELEC_A
+  //FrequencyBand = CENELEC_A
+ // ResponseTimeout = 40000
+ // ConnectTimeout =10000
+ // UDPPort = 61616
+ // PSK = "AB10341145111BC3C12DE8FF11142204"
+//}
+// Mandatory parameters of the ''Local'' HDLC Profile
+HDLCProfile =
+{
+
+  PhysicalLayer =
+  {
+    OpeningMode = DIRECT_HDLC     // or MODE_E 
+    HdlcBaud = 9600
+  }
+
+  DataLinkLayer =
+  {
+    InactivityTimeout = 150000
+    InterFrameTimeout = 100
+    ResponseTimeout = 25000
+    DISCToNDMTimeout = 2000
+    AddressingSchemes = [ONE_BYTE_ADDRESSING] // TWO_BYTES_ADDRESSING, FOUR_BYTES_ADDRESSING
+    // For TWO and FOUR bytes addressing schemes, we have to specify also a ServerLowerMACAddress
+    //ServerLowerMACAddress = 0x11
+    
+    // (Optional) Minimal delay between the last frame received and the next frame sent , default 0
+    LastRecToNextSendDelay = 0
+  }
+  
+  UIFrameDelay = 2000       // (Optional) Delay (ms) after sending an UI frame, default 0  // 2000
+  UIFrameLength = 248       // (optional) UI frames info field length, default 128
+  
+}
+
+
+// END CTI_Template

@@ -1,0 +1,7 @@
+PASSED                         749
+FAILED                         259
+DISABLED                       23
+INAPPLICABLE                   805
+INCONCLUSIVE                   20
+FATAL                          0
+TOTAL                          1856

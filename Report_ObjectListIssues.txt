@@ -1,0 +1,19 @@
+
+****************************************
+Total Missing Objects    12
+****************************************
+
+          Obis Code  Class ID  In Object List?  In RBAC Object List?  IDIS OM Status        Picasso OM Status                                                                Conclusion
+1    0-0:40.0.0.255        15      Value Found           Value Found               M  Present in Object Model    There seems to be unknown error, please check configurations and files
+2   0-0:96.11.5.255         1  Value Not Found       Value Not Found               M      Not in Object Model                  Object is not required to be implemented on this product
+3   0-0:99.98.5.255         7  Value Not Found       Value Not Found               M      Not in Object Model                  Object is not required to be implemented on this product
+4    0-1:22.0.0.255        23  Value Not Found       Value Not Found             M-C      Not in Object Model                  Object is not required to be implemented on this product
+5   1-0:32.24.0.255         3      Value Found           Value Found               M      Not in Object Model  Object Implemented while it is not in Picasso Object Model, Please check
+6   1-0:52.24.0.255         3      Value Found           Value Found               M      Not in Object Model  Object Implemented while it is not in Picasso Object Model, Please check
+7   1-0:72.24.0.255         3      Value Found           Value Found               M      Not in Object Model  Object Implemented while it is not in Picasso Object Model, Please check
+8    0-0:22.0.0.255        23  Value Not Found       Value Not Found               M      Not in Object Model                  Object is not required to be implemented on this product
+9    0-0:25.0.0.255        41  Value Not Found       Value Not Found               M      Not in Object Model                  Object is not required to be implemented on this product
+10   0-0:25.1.0.255        42  Value Not Found       Value Not Found            M-I4      Not in Object Model                  Object is not required to be implemented on this product
+11    0-0:2.1.0.255        29  Value Not Found       Value Not Found               M      Not in Object Model                  Object is not required to be implemented on this product
+12   0-0:25.2.0.255        43  Value Not Found       Value Not Found        M-E|M-G3      Not in Object Model                  Object is not required to be implemented on this product
+
